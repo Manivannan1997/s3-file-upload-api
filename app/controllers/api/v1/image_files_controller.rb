@@ -6,7 +6,8 @@ class Api::V1::ImageFilesController < ApplicationController
   end
 
   def upload
-    image_file = ImageFile.new(file_name: params[:file_name], image: params[:image])
+    file_name = params[:image].original_filename
+    image_file = ImageFile.new(file_name: file_name, image: params[:image])
     if image_file.save
       render json: image_file, serializer: ImageFileSerializer
     else
